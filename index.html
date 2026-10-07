@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Omkar | Portfolio</title>
+
+    <meta name="description" content="Omkar's personal portfolio website. Computer Engineering student, developer and creator.">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --bg: #070707;
+            --card: #101010;
+            --card2: #151515;
+            --text: #ffffff;
+            --muted: #999999;
+            --line: #252525;
+            --accent: #ffffff;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* ---------- NAVBAR ---------- */
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 22px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(7,7,7,0.75);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .logo span {
+            color: #777;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #aaa;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        .menu {
+            display: none;
+            font-size: 25px;
+            cursor: pointer;
+        }
+
+        /* ---------- HERO ---------- */
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 120px 7% 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: white;
+            opacity: 0.035;
+            filter: blur(120px);
+            border-radius: 50%;
+            top: 10%;
+            right: 5%;
+        }
+
+        .hero-content {
+            max-width: 850px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .small-title {
+            color: #888;
+            font-size: 14px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            animation: fadeUp 0.8s ease;
+        }
+
+        h1 {
+            font-size: clamp(55px, 9vw, 120px);
+            line-height: 0.9;
+            letter-spacing: -7px;
+            margin-bottom: 30px;
+            animation: fadeUp 1s ease;
+        }
+
+        h1 span {
+            color: #777;
+        }
+
+        .hero-text {
+            max-width: 650px;
+            color: #aaa;
+            font-size: 18px;
+            line-height: 1.7;
+            animation: fadeUp 1.2s ease;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 35px;
+            animation: fadeUp 1.4s ease;
+        }
+
+        .btn {
+            padding: 14px 24px;
+            border: 1px solid #444;
+            border-radius: 8px;
+            transition: 0.3s;
+            font-size: 14px;
+        }
+
+        .btn.primary {
+            background: white;
+            color: black;
+            border-color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            border-color: white;
+        }
+
+        .scroll {
+            position: absolute;
+            bottom: 30px;
+            left: 7%;
+            color: #555;
+            font-size: 12px;
+            letter-spacing: 2px;
+        }
+
+        /* ---------- SECTIONS ---------- */
+
+        section {
+            padding: 110px 7%;
+        }
+
+        .section-title {
+            font-size: 45px;
+            letter-spacing: -2px;
+            margin-bottom: 15px;
+        }
+
+        .section-subtitle {
+            color: #777;
+            margin-bottom: 55px;
+        }
+
+        /* ---------- ABOUT ---------- */
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 70px;
+            align-items: center;
+        }
+
+        .about-text {
+            color: #aaa;
+            line-height: 1.9;
+            font-size: 16px;
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .stat {
+            background: var(--card);
+            border: 1px solid var(--line);
+            padding: 30px;
+            border-radius: 12px;
+            transition: 0.3s;
+        }
+
+        .stat:hover {
+            transform: translateY(-5px);
+            border-color: #555;
+        }
+
+        .stat h3 {
+            font-size: 35px;
+            margin-bottom: 8px;
+        }
+
+        .stat p {
+            color: #777;
+            font-size: 13px;
+        }
+
+        /* ---------- SKILLS ---------- */
+
+        .skills {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .skill {
+            padding: 25px;
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            transition: 0.3s;
+        }
+
+        .skill:hover {
+            background: var(--card2);
+            transform: translateY(-5px);
+        }
+
+        .skill-number {
+            color: #555;
+            font-size: 12px;
+            margin-bottom: 25px;
+        }
+
+        .skill h3 {
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        .skill p {
+            color: #777;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        /* ---------- PROJECTS ---------- */
+
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .project {
+            min-height: 300px;
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: 15px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: 0.4s;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .project::after {
+            content: "";
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: white;
+            opacity: 0.025;
+            right: -80px;
+            top: -80px;
+        }
+
+        .project:hover {
+            transform: translateY(-7px);
+            border-color: #555;
+        }
+
+        .project-tag {
+            color: #777;
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .project h3 {
+            font-size: 28px;
+            margin: 20px 0 10px;
+        }
+
+        .project p {
+            color: #888;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        .project-link {
+            margin-top: 30px;
+            font-size: 13px;
+        }
+
+        /* ---------- CONTACT ---------- */
+
+        .contact-box {
+            border: 1px solid var(--line);
+            background: var(--card);
+            border-radius: 15px;
+            padding: 60px;
+            text-align: center;
+        }
+
+        .contact-box h2 {
+            font-size: clamp(35px, 5vw, 65px);
+            letter-spacing: -3px;
+            margin-bottom: 20px;
+        }
+
+        .contact-box p {
+            color: #777;
+            max-width: 550px;
+            margin: auto;
+            line-height: 1.7;
+        }
+
+        .contact-buttons {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        /* ---------- FOOTER ---------- */
+
+        footer {
+            padding: 30px 7%;
+            border-top: 1px solid var(--line);
+            display: flex;
+            justify-content: space-between;
+            color: #555;
+            font-size: 13px;
+        }
+
+        /* ---------- ANIMATION ---------- */
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ---------- MOBILE ---------- */
+
+        @media (max-width: 800px) {
+
+            nav {
+                padding: 20px 6%;
+            }
+
+            .menu {
+                display: block;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: #090909;
+                flex-direction: column;
+                padding: 25px 7%;
+                gap: 22px;
+                display: none;
+                border-bottom: 1px solid #222;
+            }
+
+            .nav-links.show {
+                display: flex;
+            }
+
+            .hero {
+                padding-left: 6%;
+                padding-right: 6%;
+            }
+
+            h1 {
+                font-size: 65px;
+                letter-spacing: -4px;
+            }
+
+            .hero-text {
+                font-size: 16px;
+            }
+
+            section {
+                padding: 80px 6%;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .skills {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .projects {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-box {
+                padding: 40px 20px;
+            }
+
+            footer {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+
+        @media (max-width: 450px) {
+
+            .skills {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 55px;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+
+    <nav>
+        <a href="#home" class="logo">OMKAR<span>.</span></a>
+
+        <div class="menu" onclick="toggleMenu()">☰</div>
+
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home" onclick="closeMenu()">Home</a></li>
+            <li><a href="#about" onclick="closeMenu()">About</a></li>
+            <li><a href="#skills" onclick="closeMenu()">Skills</a></li>
+            <li><a href="#projects" onclick="closeMenu()">Projects</a></li>
+            <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
+        </ul>
+    </nav>
+
+
+    <!-- HERO -->
+
+    <section class="hero" id="home">
+
+        <div class="hero-content">
+
+            <div class="small-title">
+                Computer Engineering · Developer · Creator
+            </div>
+
+            <h1>
+                Hi, I'm<br>
+                <span>Omkar.</span>
+            </h1>
+
+            <p class="hero-text">
+                I build digital experiences, explore technology,
+                and turn ideas into useful projects. Currently learning,
+                building and creating my way forward.
+            </p>
+
+            <div class="buttons">
+                <a href="#projects" class="btn primary">
+                    View My Work
+                </a>
+
+                <a href="#contact" class="btn">
+                    Contact Me
+                </a>
+            </div>
+
+        </div>
+
+        <div class="scroll">
+            SCROLL ↓
+        </div>
+
+    </section>
+
+
+    <!-- ABOUT -->
+
+    <section id="about">
+
+        <div class="reveal">
+
+            <h2 class="section-title">About Me</h2>
+
+            <p class="section-subtitle">
+                A little bit about who I am.
+            </p>
+
+        </div>
+
+        <div class="about-grid reveal">
+
+            <div class="about-text">
+
+                <p>
+                    I'm Omkar, a Computer Engineering student who enjoys
+                    technology, development, design and building new things.
+                </p>
+
+                <p>
+                    I like learning by actually creating projects instead
+                    of only studying theory. From applications and websites
+                    to data and UI/UX, I'm constantly exploring different
+                    areas of technology.
+                </p>
+
+                <p>
+                    My goal is simple: keep improving, build meaningful
+                    projects and create something I'm proud of.
+                </p>
+
+            </div>
+
+            <div class="stats">
+
+                <div class="stat">
+                    <h3>01</h3>
+                    <p>Developer</p>
+                </div>
+
+                <div class="stat">
+                    <h3>02</h3>
+                    <p>Creator</p>
+                </div>
+
+                <div class="stat">
+                    <h3>03</h3>
+                    <p>Problem Solver</p>
+                </div>
+
+                <div class="stat">
+                    <h3>∞</h3>
+                    <p>Learning Mode</p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- SKILLS -->
+
+    <section id="skills">
+
+        <div class="reveal">
+
+            <h2 class="section-title">Skills</h2>
+
+            <p class="section-subtitle">
+                Technologies and areas I'm working with.
+            </p>
+
+        </div>
+
+        <div class="skills reveal">
+
+            <div class="skill">
+                <div class="skill-number">01</div>
+                <h3>Java</h3>
+                <p>Object-oriented programming and application development.</p>
+            </div>
+
+            <div class="skill">
+                <div class="skill-number">02</div>
+                <h3>Python</h3>
+                <p>Programming, automation and exploring data.</p>
+            </div>
+
+            <div class="skill">
+                <div class="skill-number">03</div>
+                <h3>Web</h3>
+                <p>HTML, CSS and JavaScript for modern websites.</p>
+            </div>
+
+            <div class="skill">
+                <div class="skill-number">04</div>
+                <h3>UI / UX</h3>
+                <p>Designing simple and user-friendly interfaces.</p>
+            </div>
+
+            <div class="skill">
+                <div class="skill-number">05</div>
+                <h3>SQL</h3>
+                <p>Working with databases and structured data.</p>
+            </div>
+
+            <div class="skill">
+                <div class="skill-number">06</div>
+                <h3>Android</h3>
+                <p>Building mobile application concepts and interfaces.</p>
+            </div>
+
+            <div class="skill">
+                <div class="skill-number">07</div>
+                <h3>Power BI</h3>
+                <p>Data visualization and dashboard creation.</p>
+            </div>
+
+            <div class="skill">
+                <div class="skill-number">08</div>
+                <h3>Git</h3>
+                <p>Version control and project management.</p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- PROJECTS -->
+
+    <section id="projects">
+
+        <div class="reveal">
+
+            <h2 class="section-title">Projects</h2>
+
+            <p class="section-subtitle">
+                Some things I've built and experimented with.
+            </p>
+
+        </div>
+
+        <div class="projects reveal">
+
+            <div class="project">
+
+                <div>
+                    <div class="project-tag">
+                        Java · Desktop Application
+                    </div>
+
+                    <h3>Hotel Management</h3>
+
+                    <p>
+                        A Java-based hotel management system designed
+                        to manage rooms, customers and hotel operations
+                        through a simple interface.
+                    </p>
+                </div>
+
+                <a href="#" class="project-link">
+                    View Project →
+                </a>
+
+            </div>
+
+
+            <div class="project">
+
+                <div>
+                    <div class="project-tag">
+                        UI / UX · Figma
+                    </div>
+
+                    <h3>Senior Banking</h3>
+
+                    <p>
+                        A simple banking application concept focused on
+                        creating an accessible and easy-to-understand
+                        experience for senior citizens.
+                    </p>
+                </div>
+
+                <a href="#" class="project-link">
+                    View Project →
+                </a>
+
+            </div>
+
+
+            <div class="project">
+
+                <div>
+                    <div class="project-tag">
+                        Data Analytics
+                    </div>
+
+                    <h3>Analytics Dashboard</h3>
+
+                    <p>
+                        An interactive dashboard concept for converting
+                        raw information into useful visual insights.
+                    </p>
+                </div>
+
+                <a href="#" class="project-link">
+                    View Project →
+                </a>
+
+            </div>
+
+
+            <div class="project">
+
+                <div>
+                    <div class="project-tag">
+                        Android · Kotlin
+                    </div>
+
+                    <h3>India 360</h3>
+
+                    <p>
+                        A mobile application concept focused on presenting
+                        interesting information, facts and content about India.
+                    </p>
+                </div>
+
+                <a href="#" class="project-link">
+                    View Project →
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- CONTACT -->
+
+    <section id="contact">
+
+        <div class="contact-box reveal">
+
+            <h2>Let's build something.</h2>
+
+            <p>
+                Have an idea, project or opportunity?
+                Feel free to connect with me.
+            </p>
+
+            <div class="contact-buttons">
+
+                <a href="mailto:yourmail@example.com" class="btn primary">
+                    Email Me
+                </a>
+
+                <a href="https://github.com/" target="_blank" class="btn">
+                    GitHub
+                </a>
+
+                <a href="https://www.linkedin.com/" target="_blank" class="btn">
+                    LinkedIn
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <div>
+            © 2026 Omkar. All rights reserved.
+        </div>
+
+        <div>
+            Built with HTML · CSS · JavaScript
+        </div>
+
+    </footer>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script>
+
+        function toggleMenu() {
+            document.getElementById("navLinks").classList.toggle("show");
+        }
+
+        function closeMenu() {
+            document.getElementById("navLinks").classList.remove("show");
+        }
+
+        const reveals = document.querySelectorAll(".reveal");
+
+        function revealOnScroll() {
+
+            reveals.forEach(element => {
+
+                const windowHeight = window.innerHeight;
+                const elementTop = element.getBoundingClientRect().top;
+
+                if (elementTop < windowHeight - 100) {
+                    element.classList.add("active");
+                }
+
+            });
+
+        }
+
+        window.addEventListener("scroll", revealOnScroll);
+
+        revealOnScroll();
+
+    </script>
+
+</body>
+</html>
